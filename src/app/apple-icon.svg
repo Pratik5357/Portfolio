@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <rect width="180" height="180" fill="oklch(0.985 0.004 85)"/>
+  <rect
+    x="28"
+    y="28"
+    width="124"
+    height="124"
+    stroke="oklch(0.88 0.006 260)"
+    stroke-width="1"
+    fill="none"
+  />
+  <rect x="34" y="40" width="8" height="100" fill="oklch(0.46 0.1 165)"/>
+  <g fill="oklch(0.22 0.012 260)">
+    <rect x="62" y="45" width="13" height="90"/>
+    <rect x="62" y="45" width="56" height="13"/>
+    <rect x="62" y="84" width="56" height="13"/>
+    <rect x="105" y="58" width="13" height="27"/>
+  </g>
+</svg>
