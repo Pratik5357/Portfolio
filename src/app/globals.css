@@ -213,6 +213,8 @@ html.theme-transition * {
     opacity: calc(0.15 + 0.85 * var(--reveal-progress, 0));
     transition: none;
     will-change: transform, filter, opacity;
+    isolation: isolate;
+    backface-visibility: hidden;
   }
 
   .motion-reveal--scroll.motion-reveal--heading {
@@ -559,13 +561,32 @@ a {
 .contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0.75rem;
+}
+
+.contact-grid > li {
+  min-width: 0;
+  border-top: 1px solid var(--border);
+}
+
+.contact-grid > li:first-child {
+  border-top: 0;
 }
 
 @media (min-width: 640px) {
   .contact-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem 1.5rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 0;
+  }
+
+  .contact-grid > li {
+    border-top: 0;
+    border-left: 1px solid var(--border);
+    padding-left: 1.5rem;
+  }
+
+  .contact-grid > li:first-child {
+    border-left: 0;
+    padding-left: 0;
   }
 }
 

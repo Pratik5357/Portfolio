@@ -26,9 +26,9 @@ export default function Home() {
             <ScrollSpyNav variant="mobile" />
             <Hero />
             <div className="mt-12 space-y-0 sm:mt-16 lg:mt-20">
+              <Experience />
               <Projects />
               <TechStack />
-              <Experience />
               <Contact />
             </div>
             <footer className="mt-12 border-t border-border pt-6 sm:mt-16 sm:pt-8 lg:mt-20">

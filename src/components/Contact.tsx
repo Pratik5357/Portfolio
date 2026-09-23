@@ -31,13 +31,6 @@ const links: ContactLink[] = [
     external: true,
     valueClassName: "copy-stable",
   },
-  {
-    label: "Résumé",
-    href: site.resumePath,
-    value: "PDF download",
-    external: false,
-    valueClassName: "copy-stable",
-  },
 ];
 
 export function Contact() {
@@ -64,13 +57,12 @@ export function Contact() {
               key={link.label}
               as="li"
               variant="row"
-              className="min-w-0"
             >
               <a
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="group touch-link flex min-h-[3.25rem] min-w-0 w-full flex-col justify-center gap-1.5 rounded-sm border border-border px-4 py-3 sm:border-0 sm:px-0 sm:py-2"
+                className="group touch-link flex min-h-11 min-w-0 w-full flex-col justify-center gap-1.5 py-5 sm:min-h-[4.5rem] sm:py-1"
               >
                 <span className="label-caps transition-colors duration-300 group-hover:text-accent">
                   {link.label}

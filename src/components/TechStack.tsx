@@ -16,8 +16,7 @@ export function TechStack() {
         </RevealOnView>
         <p className="section-lead">
           Core is what I use at work. Secondary is stuff I&apos;ve touched but
-          wouldn&apos;t claim as a specialty yet — Azure, the team&apos;s CI/CD
-          setup, MERN from side projects.
+          wouldn&apos;t claim as a specialty yet — MVC, MERN from side projects.
         </p>
 
         <div className="section-body grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">

@@ -22,20 +22,12 @@ export function Hero() {
         <p className="mt-5 font-mono text-xs leading-relaxed text-muted text-pretty sm:mt-6">
           {site.location}
         </p>
-        <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 sm:mt-6">
-          <a
-            href="#projects"
-            className="motion-link touch-link font-mono text-sm whitespace-nowrap"
-          >
-            Projects
-          </a>
-          <a
-            href={site.resumePath}
-            className="motion-link touch-link font-mono text-sm whitespace-nowrap"
-          >
-            Résumé (PDF)
-          </a>
-        </div>
+        <a
+          href="#experience"
+          className="motion-link touch-link mt-5 font-mono text-sm whitespace-nowrap sm:mt-6"
+        >
+          Experience
+        </a>
       </div>
     </header>
   );

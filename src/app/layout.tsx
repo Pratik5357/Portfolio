@@ -26,7 +26,7 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: `${site.name} — ${site.title}`,
+  title: site.pageTitle,
   description,
   alternates: {
     canonical: "/",
@@ -36,12 +36,12 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: site.name,
-    title: `${site.name} — ${site.title}`,
+    title: site.pageTitle,
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — ${site.title}`,
+    title: site.pageTitle,
     description,
   },
 };

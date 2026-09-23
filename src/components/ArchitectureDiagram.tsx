@@ -11,9 +11,15 @@ import {
 type ArchitectureDiagramProps = {
   steps: string[];
   id: string;
+  /** When true, steps inherit parent reveal — no per-step blur/opacity scroll. */
+  coordinatedReveal?: boolean;
 };
 
-export function ArchitectureDiagram({ steps, id }: ArchitectureDiagramProps) {
+export function ArchitectureDiagram({
+  steps,
+  id,
+  coordinatedReveal = false,
+}: ArchitectureDiagramProps) {
   const ref = useRef<HTMLElement>(null);
   const [mode, setMode] = useState<RevealMode>("scroll");
 
@@ -22,7 +28,7 @@ export function ArchitectureDiagram({ steps, id }: ArchitectureDiagramProps) {
   }, []);
 
   useEffect(() => {
-    if (mode !== "scroll") return;
+    if (mode !== "scroll" || coordinatedReveal) return;
 
     const root = ref.current;
     if (!root) return;
@@ -48,14 +54,14 @@ export function ArchitectureDiagram({ steps, id }: ArchitectureDiagramProps) {
     };
 
     return subscribeScrollReveal(update);
-  }, [mode, steps.length]);
+  }, [mode, steps.length, coordinatedReveal]);
 
   return (
     <figure
       ref={ref}
       aria-labelledby={`${id}-diagram-title`}
       className={`motion-flow w-full min-w-0 max-w-full xl:max-w-[17.5rem] ${
-        mode === "scroll" ? "motion-flow--scroll" : ""
+        mode === "scroll" && !coordinatedReveal ? "motion-flow--scroll" : ""
       }`}
     >
       <figcaption id={`${id}-diagram-title`} className="sr-only">

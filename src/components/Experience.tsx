@@ -7,7 +7,7 @@ export function Experience() {
       <section
         id="experience"
         aria-labelledby="experience-heading"
-        className="section-block section-block--ruled"
+        className="section-block"
       >
         <RevealOnView variant="heading">
           <h2 id="experience-heading" className="section-title">
@@ -15,8 +15,8 @@ export function Experience() {
           </h2>
         </RevealOnView>
         <p className="section-lead">
-          What I do day to day at Tudip — project specifics are in Projects
-          above.
+          What I ship day to day at Tudip — APIs, SQL Server, and the
+          integrations I built.
         </p>
 
         <ol className="section-body space-y-0">
@@ -46,6 +46,20 @@ export function Experience() {
                 <p className="body-copy mt-3 !text-foreground/75">
                   {entry.summary}
                 </p>
+                {entry.shipped && entry.shipped.length > 0 && (
+                  <ul className="mt-8 space-y-6">
+                    {entry.shipped.map((item) => (
+                      <li key={item.title} className="min-w-0">
+                        <p className="font-medium leading-snug text-pretty">
+                          {item.title}
+                        </p>
+                        <p className="body-copy mt-2 !text-foreground/75">
+                          {item.did}
+                        </p>
+                      </li>
+                    ))}
+                  </ul>
+                )}
                 {entry.highlights && entry.highlights.length > 0 && (
                   <ul className="mt-5 space-y-3">
                     {entry.highlights.map((highlight) => (
