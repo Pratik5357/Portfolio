@@ -38,16 +38,18 @@ function ProjectArticle({ project }: { project: Project }) {
           </div>
         </div>
 
-        <dl className="case-metrics mt-6 sm:mt-8">
-          {project.metrics.map((metric) => (
-            <div key={metric.label} className="min-w-0 border-l border-border pl-4">
-              <dt className="label-caps">{metric.label}</dt>
-              <dd className="metric-value mt-2 font-mono text-lg leading-snug tabular-nums tracking-tight">
-                {metric.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        {project.metrics.length > 0 && (
+          <dl className="case-metrics mt-6 sm:mt-8">
+            {project.metrics.map((metric) => (
+              <div key={metric.label} className="min-w-0 border-l border-border pl-4">
+                <dt className="label-caps">{metric.label}</dt>
+                <dd className="metric-value mt-2 font-mono text-lg leading-snug tabular-nums tracking-tight">
+                  {metric.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
 
         <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
           <ul
@@ -67,7 +69,7 @@ function ProjectArticle({ project }: { project: Project }) {
           <div className="flex shrink-0 flex-col items-start gap-2 sm:max-w-[14rem] sm:items-end sm:text-right">
             {project.proprietary && (
               <p className="font-mono text-xs leading-relaxed text-muted text-pretty">
-                Client work — code not public
+                Client work, code not public
               </p>
             )}
             {project.repoUrl && (
@@ -100,7 +102,7 @@ export function Projects() {
             Projects
           </h2>
           <p className="section-lead">
-            Personal work I can show — architecture, decisions, and the repo.
+            Selected work, with the architecture, the decisions, and the outcomes behind it. Repo linked where I can share one.
           </p>
         </div>
       </RevealOnView>

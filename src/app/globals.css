@@ -114,25 +114,25 @@ html.theme-transition * {
     will-change: transform;
   }
 
-  /* Hero — layered focal sequence */
+  /* Hero — simple fade/rise, no clip-path or blur choreography */
   .motion-hero__name {
-    animation: hero-reveal var(--duration-slow) var(--ease-dramatic) both;
+    animation: hero-reveal var(--duration-fast) var(--ease-out) both;
   }
 
   .motion-hero__meta {
     opacity: 0;
-    animation: hero-rise var(--duration-base) var(--ease-dramatic) both;
-    animation-delay: 320ms;
+    animation: hero-rise var(--duration-fast) var(--ease-out) both;
+    animation-delay: 120ms;
   }
 
   .motion-hero__meta + .motion-hero__meta {
-    animation-delay: 480ms;
+    animation-delay: 180ms;
   }
 
   .motion-hero__aside {
     opacity: 0;
-    animation: hero-aside-in var(--duration-base) var(--ease-dramatic) both;
-    animation-delay: 640ms;
+    animation: hero-aside-in var(--duration-fast) var(--ease-out) both;
+    animation-delay: 220ms;
   }
 
   .motion-hero {
@@ -155,7 +155,7 @@ html.theme-transition * {
     );
     transform: scaleX(0);
     transform-origin: left center;
-    animation: rule-draw 900ms var(--ease-dramatic) 800ms both;
+    animation: rule-draw 500ms var(--ease-dramatic) 260ms both;
   }
 
   /* Nav */
@@ -220,23 +220,19 @@ html.theme-transition * {
   .motion-reveal--scroll.motion-reveal--heading {
     transform: translateY(calc((1 - var(--reveal-progress, 0)) * 24px))
       translateX(calc((1 - var(--reveal-progress, 0)) * -10px));
-    filter: blur(calc((1 - var(--reveal-progress, 0)) * 5px));
   }
 
   .motion-reveal--scroll.motion-reveal--section {
     transform: translateY(calc((1 - var(--reveal-progress, 0)) * 48px));
-    filter: blur(calc((1 - var(--reveal-progress, 0)) * 8px));
   }
 
   .motion-reveal--scroll.motion-reveal--item {
     transform: translateY(calc((1 - var(--reveal-progress, 0)) * 36px))
       scale(calc(0.985 + 0.015 * var(--reveal-progress, 0)));
-    filter: blur(calc((1 - var(--reveal-progress, 0)) * 6px));
   }
 
   .motion-reveal--scroll.motion-reveal--row {
     transform: translateX(calc((1 - var(--reveal-progress, 0)) * -20px));
-    filter: blur(calc((1 - var(--reveal-progress, 0)) * 3px));
   }
 
   /* Architecture flow — scroll-linked per step */
@@ -244,7 +240,6 @@ html.theme-transition * {
     opacity: calc(0.15 + 0.85 * var(--reveal-progress, 0));
     transform: translateX(calc((1 - var(--reveal-progress, 0)) * -14px))
       scale(calc(0.97 + 0.03 * var(--reveal-progress, 0)));
-    filter: blur(calc((1 - var(--reveal-progress, 0)) * 4px));
     transition: none;
   }
 
@@ -291,47 +286,35 @@ html.theme-transition * {
 }
 
 @keyframes hero-reveal {
-  0% {
-    clip-path: inset(0 100% 0 0);
-    opacity: 0.2;
-    filter: blur(8px);
-    letter-spacing: 0.04em;
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
-  55% {
-    filter: blur(2px);
-    letter-spacing: 0.01em;
-  }
-  100% {
-    clip-path: inset(0 0 0 0);
+  to {
     opacity: 1;
-    filter: blur(0);
-    letter-spacing: -0.03em;
+    transform: translateY(0);
   }
 }
 
 @keyframes hero-rise {
   from {
     opacity: 0;
-    transform: translateY(22px);
-    filter: blur(4px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
 @keyframes hero-aside-in {
   from {
     opacity: 0;
-    transform: translateY(28px) translateX(12px);
-    filter: blur(6px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
-    transform: translateY(0) translateX(0);
-    filter: blur(0);
+    transform: translateY(0);
   }
 }
 

@@ -16,7 +16,7 @@ export function TechStack() {
         </RevealOnView>
         <p className="section-lead">
           Core is what I use at work. Secondary is stuff I&apos;ve touched but
-          wouldn&apos;t claim as a specialty yet — MVC, MERN from side projects.
+          wouldn&apos;t claim as a specialty yet, like MVC or MERN from side projects.
         </p>
 
         <div className="section-body grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
@@ -43,23 +43,32 @@ export function TechStack() {
 
           <div className="min-w-0 border-t border-border pt-10 sm:pt-12 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12 xl:pl-16">
             <h3 className="label-caps">Also worked with</h3>
-            <ul className="mt-5 space-y-5">
-              {techStack.secondary.map((item) => (
-                <RevealOnView
-                  key={item.name}
-                  as="li"
-                  variant="row"
-                  className="stack-row"
-                >
-                  <span className="min-w-0 font-medium leading-snug text-pretty">
-                    {item.name}
-                  </span>
-                  <span className="body-copy !max-w-none !text-foreground/75">
-                    {item.depth}
-                  </span>
-                </RevealOnView>
+            <div className="mt-5 space-y-7">
+              {techStack.secondary.map((group) => (
+                <div key={group.group} className="min-w-0">
+                  <p className="label-caps text-[11px] text-muted/70">
+                    {group.group}
+                  </p>
+                  <ul className="mt-3 space-y-5">
+                    {group.items.map((item) => (
+                      <RevealOnView
+                        key={item.name}
+                        as="li"
+                        variant="row"
+                        className="stack-row"
+                      >
+                        <span className="min-w-0 font-medium leading-snug text-pretty">
+                          {item.name}
+                        </span>
+                        <span className="body-copy !max-w-none !text-foreground/75">
+                          {item.depth}
+                        </span>
+                      </RevealOnView>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </section>

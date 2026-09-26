@@ -15,7 +15,7 @@ export function Experience() {
           </h2>
         </RevealOnView>
         <p className="section-lead">
-          What I ship day to day at Tudip — APIs, SQL Server, and the
+          What I ship day to day at Tudip, from APIs to SQL Server to the
           integrations I built.
         </p>
 

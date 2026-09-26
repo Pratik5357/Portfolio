@@ -39,13 +39,13 @@ Minimum UI text: 12px (`text-xs`). Body: 14–16px.
 
 ## Motion
 
-**Thesis:** Hero is a 1.3s layered sequence (clip + blur + letter-spacing settle). Scroll drives section reveals via CSS `view()` timeline where supported; fallback uses 780ms blur+translate transitions. Architecture flows cascade at 220ms/step. Scroll progress bar + accent rail track position; native scrollbar thumb opacity follows `--scroll-progress`.
+**Thesis:** Minimal — subtle hovers only, per product brief. Hero is a simple fade/rise (~320–380ms, staggered by ~100ms per element), no clip-path wipe or blur choreography. Scroll drives section reveals via a JS scroll listener computing per-element progress (`src/lib/scrollReveal.ts`), applied as translate-only transforms (no blur) so content stays legible before it's fully in view. Architecture flows cascade similarly, translate-only. Scroll progress bar + accent rail track position; native scrollbar thumb opacity follows `--scroll-progress`.
 
 | Token | Value |
 |-------|-------|
 | `--ease-dramatic` | `cubic-bezier(0.22, 1, 0.36, 1)` |
-| `--duration-base` | 780ms |
-| `--duration-slow` | 1.35s |
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` |
+| `--duration-fast` | 320ms |
 
 ## Browser surfaces
 

@@ -22,7 +22,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = getSiteUrl();
 const description =
-  "Backend developer at Tudip — ASP.NET Core Web APIs, SQL Server, Microsoft Graph inbox OCR, and portal integrations (Zoho CRM, RingCentral). MERN side project: Ethix Portal.";
+  "Backend developer at Tudip, working on ASP.NET Core Web APIs, SQL Server, Microsoft Graph order-email ingestion, and portal integrations (Zoho CRM, RingCentral, Stripe). Also built Ethix Portal, a MERN side project.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

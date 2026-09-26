@@ -47,7 +47,7 @@ export function Contact() {
           </h2>
         </RevealOnView>
         <p className="section-lead">
-          Email or LinkedIn works best. No form on purpose — I reply faster to a
+          Email or LinkedIn works best. No form on purpose. I reply faster to a
           direct message.
         </p>
 

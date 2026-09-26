@@ -9,7 +9,7 @@ type ScrollSpyNavProps = {
 };
 
 export function ScrollSpyNav({ variant }: ScrollSpyNavProps) {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(navSections[0]?.id ?? null);
 
   const smoothScrollTo = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -37,7 +37,9 @@ export function ScrollSpyNav({ variant }: ScrollSpyNavProps) {
       if (projectsSection) {
         const projectsTop = projectsSection.getBoundingClientRect().top;
         if (projectsTop > window.innerHeight * 0.35) {
-          setActiveId(null);
+          // Nothing is actively intersecting yet (e.g. still in the Hero) — point at
+          // the first section instead of clearing the nav to a dead, cue-less state.
+          setActiveId(navSections[0]?.id ?? null);
         }
       }
     };
