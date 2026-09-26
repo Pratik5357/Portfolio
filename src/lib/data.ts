@@ -3,6 +3,7 @@ export type Project = {
   title: string;
   context: string;
   category: "work" | "personal";
+  verdict: string;
   problem: string;
   decision: string;
   architecture: string[];
@@ -44,6 +45,7 @@ export const projects: Project[] = [
     title: "Order Ingestion from Inbox Templates",
     context: "Work · Tudip Technologies · Microsoft Graph",
     category: "work",
+    verdict: "Orders now flow from inbox to system automatically, no manual entry.",
     problem:
       "Client orders arrived as HTML emails in Outlook, each client using its own template. Getting that data into the system meant someone reading the email and keying the order in by hand.",
     decision:
@@ -65,6 +67,7 @@ export const projects: Project[] = [
     title: "Splitting a Legacy MVC App into a Standalone API",
     context: "Work · Tudip Technologies · .NET Core Web API",
     category: "work",
+    verdict: "Frontend and backend now ship on independent release cycles.",
     problem:
       "The product was getting a full revamp, new design and a new frontend stack. The existing ASP.NET MVC app couldn't carry that redesign without becoming unmanageable if extended in place.",
     decision:
@@ -91,6 +94,7 @@ export const projects: Project[] = [
     title: "Automating AI-Assisted Report Validation",
     context: "Work · Tudip Technologies · Hangfire + AI validation",
     category: "work",
+    verdict: "The correctness pass and re-routing to researchers now run automatically.",
     problem:
       "Before a report was approved, an editor read it end to end looking for anything incorrect, incomplete, or needing more research. It was a fully manual pass on every report.",
     decision:
@@ -112,6 +116,7 @@ export const projects: Project[] = [
     title: "Ethix Portal",
     context: "Personal project · IEC research ethics · MERN",
     category: "personal",
+    verdict: "Four roles, eight proposal states, one portal from draft to approval.",
     problem:
       "IEC proposals are long forms (investigators, consent sections, checklists, attachments) and multiple people touch each one before it gets approved. Spreadsheets and email threads weren't cutting it.",
     decision:

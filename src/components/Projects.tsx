@@ -12,6 +12,9 @@ function ProjectArticle({ project }: { project: Project }) {
         <h3 className="mt-4 text-lg font-medium leading-snug tracking-[-0.02em] text-pretty sm:mt-5 sm:text-xl">
           {project.title}
         </h3>
+        <p className="mt-3 font-medium leading-snug text-pretty text-foreground/90">
+          {project.verdict}
+        </p>
         <div className="mt-6">
           <h4 className="label-caps">Problem</h4>
           <p className="body-copy mt-3">{project.problem}</p>
