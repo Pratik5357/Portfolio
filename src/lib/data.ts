@@ -11,6 +11,7 @@ export type Project = {
   metrics: { label: string; value: string }[];
   stack: string[];
   repoUrl?: string;
+  demoUrl?: string;
   proprietary?: boolean;
 };
 
@@ -137,6 +138,7 @@ export const projects: Project[] = [
     ],
     stack: ["React", "Express", "Node.js", "MongoDB", "JWT"],
     repoUrl: "https://github.com/Pratik5357/EthixPortal",
+    demoUrl: "https://ethixportal.netlify.app/",
   },
 ];
 

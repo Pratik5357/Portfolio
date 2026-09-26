@@ -75,6 +75,16 @@ function ProjectArticle({ project }: { project: Project }) {
                 Client work, code not public
               </p>
             )}
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="motion-link touch-link min-h-11 whitespace-nowrap px-1 font-mono text-xs"
+              >
+                View live →
+              </a>
+            )}
             {project.repoUrl && (
               <a
                 href={project.repoUrl}
