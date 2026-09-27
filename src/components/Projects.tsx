@@ -82,7 +82,7 @@ function ProjectArticle({ project }: { project: Project }) {
                 rel="noopener noreferrer"
                 className="motion-link touch-link min-h-11 whitespace-nowrap px-1 font-mono text-xs"
               >
-                View live →
+                View live <span className="motion-link__arrow">→</span>
               </a>
             )}
             {project.repoUrl && (
@@ -92,7 +92,7 @@ function ProjectArticle({ project }: { project: Project }) {
                 rel="noopener noreferrer"
                 className="motion-link touch-link min-h-11 whitespace-nowrap px-1 font-mono text-xs"
               >
-                View source →
+                View source <span className="motion-link__arrow">→</span>
               </a>
             )}
           </div>

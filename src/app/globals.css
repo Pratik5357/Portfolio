@@ -158,26 +158,35 @@ html.theme-transition * {
     animation: rule-draw 500ms var(--ease-dramatic) 260ms both;
   }
 
-  /* Nav */
-  .motion-nav-indicator {
-    transform: scale(0);
-    transition: transform 520ms var(--ease-dramatic);
+  /* Nav dock — floats once on load, then only the highlight moves */
+  .motion-dock {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    transition: none;
   }
 
-  .motion-nav-indicator--active {
-    transform: scale(1);
+  .motion-dock--in {
+    animation: dock-in var(--duration-fast) var(--ease-out) both;
+    animation-delay: 260ms;
   }
 
-  .motion-nav-indicator--horizontal {
-    transform: scaleX(0);
+  .motion-dock__highlight {
+    transition:
+      transform 200ms var(--ease-out),
+      width 200ms var(--ease-out);
+    will-change: transform, width;
   }
 
-  .motion-nav-indicator--horizontal.motion-nav-indicator--active {
-    transform: scaleX(1);
+  .motion-dock__link {
+    transition: transform 120ms var(--ease-out), color 200ms var(--ease-out);
   }
 
-  .motion-nav-link {
-    transition: color 320ms var(--ease-out);
+  .motion-dock__link:active {
+    transform: scale(0.94);
+  }
+
+  .theme-toggle--compact {
+    transition: transform 120ms var(--ease-out), color 200ms var(--ease-out);
   }
 
   /* Links */
@@ -198,8 +207,8 @@ html.theme-transition * {
     transform-origin: left center;
     opacity: 0.35;
     transition:
-      transform 520ms var(--ease-dramatic),
-      opacity 320ms var(--ease-out);
+      transform 180ms var(--ease-out),
+      opacity 150ms var(--ease-out);
   }
 
   .motion-link:hover::after,
@@ -207,7 +216,21 @@ html.theme-transition * {
     transform: scaleX(1);
     opacity: 1;
   }
+}
 
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .motion-link__arrow {
+    display: inline-block;
+    transition: transform 150ms var(--ease-out);
+  }
+
+  .motion-link:hover .motion-link__arrow,
+  .motion-link:focus-visible .motion-link__arrow {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
   /* Scroll reveals — progress driven by JS per element (--reveal-progress: 0→1) */
   .motion-reveal--scroll {
     opacity: calc(0.15 + 0.85 * var(--reveal-progress, 0));
@@ -283,6 +306,15 @@ html.theme-transition * {
     transform: none;
     filter: none;
   }
+
+  .motion-dock {
+    opacity: 1;
+    transform: none;
+  }
+
+  .motion-dock__highlight {
+    transition: none;
+  }
 }
 
 @keyframes hero-reveal {
@@ -329,47 +361,14 @@ html.theme-transition * {
   }
 }
 
-@keyframes reveal-heading {
+@keyframes dock-in {
   from {
-    transform: translateY(24px) translateX(-10px);
-    filter: blur(5px);
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
   }
   to {
-    transform: translateY(0) translateX(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes reveal-section {
-  from {
-    transform: translateY(48px);
-    filter: blur(8px);
-  }
-  to {
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-@keyframes reveal-item {
-  from {
-    transform: translateY(36px) scale(0.985);
-    filter: blur(6px);
-  }
-  to {
+    opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes reveal-row {
-  from {
-    transform: translateX(-20px);
-    filter: blur(3px);
-  }
-  to {
-    transform: translateX(0);
-    filter: blur(0);
   }
 }
 
@@ -625,6 +624,11 @@ a {
   min-height: max(2.75rem, 44px);
   align-items: center;
   border-radius: 2px;
+  transition: transform 120ms var(--ease-out);
+}
+
+.touch-link:active {
+  transform: scale(0.97);
 }
 
 .touch-link:focus-visible {
@@ -643,4 +647,9 @@ a {
 
 .theme-toggle {
   background: color-mix(in oklch, var(--background) 88%, transparent);
+  transition: transform 120ms var(--ease-out), background-color 200ms var(--ease-out);
+}
+
+.theme-toggle:active {
+  transform: scale(0.97);
 }

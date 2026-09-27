@@ -2,9 +2,8 @@ import { Projects } from "@/components/Projects";
 import { Contact } from "@/components/Contact";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
-import { ScrollSpyNav } from "@/components/ScrollSpyNav";
+import { NavDock } from "@/components/NavDock";
 import { TechStack } from "@/components/TechStack";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Home() {
   return (
@@ -15,30 +14,23 @@ export default function Home() {
       >
         Skip to content
       </a>
-      <div className="mx-auto max-w-6xl px-4 py-8 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-8 sm:py-14 lg:py-16">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
-          <aside className="hidden min-w-0 lg:col-span-2 lg:block lg:pt-2">
-            <ThemeToggle className="mb-8 w-full justify-center" />
-            <ScrollSpyNav variant="desktop" />
-          </aside>
-
-          <main id="main-content" className="min-w-0 lg:col-span-10">
-            <ScrollSpyNav variant="mobile" />
-            <Hero />
-            <div className="mt-12 space-y-0 sm:mt-16 lg:mt-20">
-              <Experience />
-              <Projects />
-              <TechStack />
-              <Contact />
-            </div>
-            <footer className="mt-12 border-t border-border pt-6 sm:mt-16 sm:pt-8 lg:mt-20">
-              <p className="font-mono text-xs leading-relaxed text-muted">
-                {new Date().getFullYear()} · Pratik Keraba Kumbhar
-              </p>
-            </footer>
-          </main>
-        </div>
+      <div className="mx-auto max-w-6xl px-4 py-8 pb-28 sm:px-8 sm:py-14 sm:pb-32 lg:py-16">
+        <main id="main-content" className="min-w-0">
+          <Hero />
+          <div className="mt-12 space-y-0 sm:mt-16 lg:mt-20">
+            <Experience />
+            <Projects />
+            <TechStack />
+            <Contact />
+          </div>
+          <footer className="mt-12 border-t border-border pt-6 sm:mt-16 sm:pt-8 lg:mt-20">
+            <p className="font-mono text-xs leading-relaxed text-muted">
+              {new Date().getFullYear()} · Pratik Keraba Kumbhar
+            </p>
+          </footer>
+        </main>
       </div>
+      <NavDock />
     </>
   );
 }

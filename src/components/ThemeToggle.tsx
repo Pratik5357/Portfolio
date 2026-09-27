@@ -4,6 +4,8 @@ import { useTheme } from "./ThemeProvider";
 
 type ThemeToggleProps = {
   className?: string;
+  /** Icon-only, no border — for use inside a tight container like the nav dock. */
+  compact?: boolean;
 };
 
 function SunIcon() {
@@ -41,7 +43,7 @@ function MoonIcon() {
   );
 }
 
-export function ThemeToggle({ className = "" }: ThemeToggleProps) {
+export function ThemeToggle({ className = "", compact = false }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === "dark";
 
@@ -52,6 +54,20 @@ export function ThemeToggle({ className = "" }: ThemeToggleProps) {
       document.documentElement.classList.remove("theme-transition");
     }, 280);
   };
+
+  if (compact) {
+    return (
+      <button
+        type="button"
+        onClick={handleToggle}
+        className={`theme-toggle theme-toggle--compact flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent ${className}`}
+        aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+        aria-pressed={isDark}
+      >
+        {isDark ? <SunIcon /> : <MoonIcon />}
+      </button>
+    );
+  }
 
   return (
     <button
