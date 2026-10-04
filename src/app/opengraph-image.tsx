@@ -55,7 +55,7 @@ export default function OpenGraphImage() {
           </p>
         </div>
         <p style={{ margin: 0, fontSize: 20, color: "#6b6a64" }}>
-          ASP.NET Core · SQL Server · Integrations
+          ASP.NET Core, SQL Server, and integrations
         </p>
       </div>
     ),

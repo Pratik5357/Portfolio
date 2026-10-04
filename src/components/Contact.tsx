@@ -39,7 +39,7 @@ export function Contact() {
       <section
         id="contact"
         aria-labelledby="contact-heading"
-        className="section-block section-block--ruled pb-4"
+        className="section-block section-block--ruled"
       >
         <RevealOnView variant="heading">
           <h2 id="contact-heading" className="section-title">
@@ -62,7 +62,7 @@ export function Contact() {
                 href={link.href}
                 target={link.external ? "_blank" : undefined}
                 rel={link.external ? "noopener noreferrer" : undefined}
-                className="group touch-link flex min-h-11 min-w-0 w-full flex-col justify-center gap-1.5 py-5 sm:min-h-[4.5rem] sm:py-1"
+                className="group touch-link flex min-h-11 min-w-0 w-full flex-col !items-start justify-center gap-1.5 py-5 sm:min-h-[4.5rem] sm:py-1"
               >
                 <span className="label-caps transition-colors duration-300 group-hover:text-accent">
                   {link.label}

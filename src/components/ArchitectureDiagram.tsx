@@ -7,11 +7,12 @@ import {
   subscribeScrollReveal,
   type RevealMode,
 } from "@/lib/scrollReveal";
+import { ChevronDownIcon } from "./Icons";
 
 type ArchitectureDiagramProps = {
   steps: string[];
   id: string;
-  /** When true, steps inherit parent reveal — no per-step blur/opacity scroll. */
+  /** When true, steps inherit parent reveal: no per-step blur/opacity scroll. */
   coordinatedReveal?: boolean;
 };
 
@@ -81,9 +82,12 @@ export function ArchitectureDiagram({
             </div>
             {index < steps.length - 1 && (
               <div
-                className="motion-flow__connector mx-auto my-1.5 h-3 w-px bg-foreground/25"
+                className="motion-flow__connector my-1 flex flex-col items-center text-foreground/40"
                 aria-hidden="true"
-              />
+              >
+                <span className="h-2 w-px bg-current" />
+                <ChevronDownIcon size={12} className="-mt-[5px]" />
+              </div>
             )}
           </li>
         ))}

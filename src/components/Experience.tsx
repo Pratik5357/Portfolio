@@ -1,4 +1,5 @@
 import { experience } from "@/lib/data";
+import { ArrowDownIcon } from "./Icons";
 import { RevealOnView } from "./RevealOnView";
 
 export function Experience() {
@@ -25,7 +26,7 @@ export function Experience() {
               key={entry.period}
               as="li"
               variant="row"
-              className="stack-row border-t border-border py-6 first:border-t-0 first:pt-0 sm:py-8"
+              className="stack-row border-t border-border py-6 first:border-t-0 first:pt-0 last:pb-0 sm:py-8"
             >
               <time
                 dateTime={
@@ -40,43 +41,52 @@ export function Experience() {
               <div className="min-w-0">
                 <p className="font-medium leading-snug text-pretty">
                   <span className="whitespace-nowrap">{entry.role}</span>
-                  <span className="text-foreground/50"> · </span>
+                  <span className="text-foreground/50"> at </span>
                   <span className="text-foreground/80">{entry.company}</span>
                 </p>
                 <p className="body-copy mt-3 !text-foreground/75">
                   {entry.summary}
                 </p>
-                {entry.shipped && entry.shipped.length > 0 && (
-                  <ul className="mt-8 space-y-6">
-                    {entry.shipped.map((item) => (
-                      <li key={item.title} className="min-w-0">
-                        <p className="font-medium leading-snug text-pretty">
-                          {item.title}
-                        </p>
-                        <p className="body-copy mt-2 !text-foreground/75">
-                          {item.did}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
+                {entry.dayToDay && (
+                  <p className="mt-3 max-w-[65ch] text-sm leading-relaxed text-pretty text-muted">
+                    {entry.dayToDay}
+                  </p>
                 )}
-                {entry.highlights && entry.highlights.length > 0 && (
-                  <ul className="mt-5 space-y-3">
-                    {entry.highlights.map((highlight) => (
+                {entry.timeline && entry.timeline.length > 0 && (
+                  <ol className="work-timeline mt-8" aria-label="Work shipped, newest first">
+                    {entry.timeline.map((item) => (
                       <li
-                        key={highlight}
-                        className="flex gap-2.5 text-sm leading-relaxed text-foreground/75"
+                        key={item.title}
+                        className="work-timeline__item"
+                        aria-current={item.current ? "step" : undefined}
                       >
                         <span
-                          className="shrink-0 font-mono text-accent/70"
+                          className={`work-timeline__dot${item.current ? " work-timeline__dot--current" : ""}`}
                           aria-hidden="true"
-                        >
-                          /
-                        </span>
-                        <span className="min-w-0 text-pretty">{highlight}</span>
+                        />
+                        <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium leading-snug text-pretty">
+                          {item.title}
+                          {item.current && (
+                            <span className="border border-accent/40 px-1.5 py-px font-mono text-xs font-normal leading-relaxed text-accent">
+                              In progress
+                            </span>
+                          )}
+                        </p>
+                        <p className="body-copy mt-1.5 !text-foreground/75">
+                          {item.did}
+                        </p>
+                        {item.caseStudy && (
+                          <a
+                            href={`#${item.caseStudy}`}
+                            className="motion-link touch-link -mb-3 -mt-1.5 inline-flex items-center gap-1 font-mono text-xs"
+                          >
+                            Case study
+                            <ArrowDownIcon size={13} className="motion-link__arrow motion-link__arrow--down" />
+                          </a>
+                        )}
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                 )}
               </div>
             </RevealOnView>

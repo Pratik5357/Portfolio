@@ -1,4 +1,7 @@
 import { site } from "@/lib/data";
+import { MapPinIcon } from "./Icons";
+
+const focusAreas = [".NET", "Web API", "SQL Server", "Integrations"];
 
 export function Hero() {
   return (
@@ -10,9 +13,19 @@ export function Hero() {
         <p className="motion-hero__meta mt-4 font-mono text-sm leading-relaxed text-muted text-pretty sm:mt-5">
           {site.title}
         </p>
-        <p className="motion-hero__meta mt-2 font-mono text-xs leading-relaxed tracking-wide text-muted text-pretty sm:mt-3">
-          .NET · Web API · SQL Server · Integrations
-        </p>
+        <ul
+          className="motion-hero__meta mt-3 flex flex-wrap gap-2 sm:mt-4"
+          aria-label="Focus areas"
+        >
+          {focusAreas.map((area) => (
+            <li
+              key={area}
+              className="border border-border px-2 py-0.5 font-mono text-xs leading-relaxed text-muted"
+            >
+              {area}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <div className="motion-hero__aside min-w-0 border-t border-border pt-8 lg:col-span-4 lg:col-start-9 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
@@ -22,7 +35,8 @@ export function Hero() {
         <p className="mt-4 max-w-full break-words font-mono text-xs leading-relaxed text-foreground/70 text-pretty sm:mt-5">
           {site.shipped}
         </p>
-        <p className="mt-5 font-mono text-xs leading-relaxed text-muted text-pretty sm:mt-6">
+        <p className="mt-5 flex items-center gap-1.5 font-mono text-xs leading-relaxed text-muted text-pretty sm:mt-6">
+          <MapPinIcon size={13} className="shrink-0" />
           {site.location}
         </p>
         <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 sm:mt-6">

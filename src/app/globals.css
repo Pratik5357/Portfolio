@@ -14,7 +14,7 @@
   --selection-fg: oklch(0.18 0.012 260);
   --focus-ring: oklch(0.46 0.1 165 / 0.45);
   --copy: oklch(0.22 0.012 260 / 0.85);
-  --copy-lead: oklch(0.22 0.012 260 / 0.8);
+  --copy-lead: oklch(0.22 0.012 260 / 0.85);
   --progress-track: oklch(0.88 0.006 260 / 0.6);
   --progress-fill-start: oklch(0.46 0.1 165 / 0.5);
   --node-border: oklch(0.22 0.012 260 / 0.35);
@@ -26,9 +26,6 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-dramatic: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 320ms;
-  --duration-base: 780ms;
-  --duration-slow: 1s;
-  --duration-glacial: 2s;
 }
 
 [data-theme="dark"] {
@@ -86,6 +83,45 @@ html.theme-transition * {
 
 .motion-hero {
   border-bottom: 1px solid var(--border);
+}
+
+/* Ambient cursor spotlight — behind all content, only bleeds through
+   whitespace. Off by default; only shown for fine-pointer + motion-ok. */
+.cursor-spotlight {
+  position: fixed;
+  top: -210px;
+  left: -210px;
+  /* 0, not -1: the page content wrapper is explicitly `position: relative; z-index: 10`
+     (see page.tsx). Two siblings that both declare a stacking context sort strictly by
+     that number — no ambiguity. A negative z-index here previously had no positioned,
+     z-indexed sibling to sort against, so it fell back to painting under <html>/<body>'s
+     own opaque background — invisible regardless of device or motion settings. */
+  z-index: 0;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--accent) 22%, transparent) 0%,
+    transparent 70%
+  );
+  filter: blur(28px);
+  opacity: 0;
+  pointer-events: none;
+  backface-visibility: hidden;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .cursor-spotlight {
+    opacity: 1;
+    /* Short: this should read as "smoothly following," not "catching up." 450ms
+       previously made it visibly trail the cursor — this is a feel fix, not a
+       tool change; the transition (not a spring) was already the right tool here. */
+    transition:
+      transform 120ms var(--ease-in-out),
+      opacity 400ms var(--ease-out);
+    will-change: transform;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -228,6 +264,11 @@ html.theme-transition * {
   .motion-link:focus-visible .motion-link__arrow {
     transform: translateX(3px);
   }
+
+  .motion-link:hover .motion-link__arrow--down,
+  .motion-link:focus-visible .motion-link__arrow--down {
+    transform: translateY(2px);
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -247,6 +288,10 @@ html.theme-transition * {
 
   .motion-reveal--scroll.motion-reveal--section {
     transform: translateY(calc((1 - var(--reveal-progress, 0)) * 48px));
+    /* Materializing arrival, not a slide-up: each section assembles into focus
+       rather than just rising, so crossing into it reads as a distinct moment
+       without touching scroll itself — still fully driven by --reveal-progress. */
+    filter: blur(calc((1 - var(--reveal-progress, 0)) * 6px));
   }
 
   .motion-reveal--scroll.motion-reveal--item {
@@ -372,28 +417,6 @@ html.theme-transition * {
   }
 }
 
-@keyframes flow-step-reveal {
-  from {
-    transform: translateX(-14px) scale(0.97);
-    filter: blur(4px);
-  }
-  to {
-    transform: translateX(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-@keyframes flow-connector-reveal {
-  from {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  to {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
 ::selection {
   background: var(--selection-bg);
   color: var(--selection-fg);
@@ -421,17 +444,20 @@ a {
 /* Layout & type rhythm */
 .section-block {
   scroll-margin-top: 5.5rem;
+  padding-bottom: 2.5rem;
 }
 
 @media (min-width: 640px) {
   .section-block {
     scroll-margin-top: 6rem;
+    padding-bottom: 3.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-block {
     scroll-margin-top: 7rem;
+    padding-bottom: 4rem;
   }
 }
 
@@ -487,6 +513,74 @@ a {
   }
 }
 
+/* Work timeline: newest first, one hairline spine, the current item marked in accent. */
+.work-timeline__item {
+  position: relative;
+  padding-left: 1.75rem;
+  padding-bottom: 2rem;
+}
+
+.work-timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.work-timeline__item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1.1rem;
+  bottom: -0.4rem;
+  width: 1px;
+  background: var(--border);
+}
+
+.work-timeline__dot {
+  position: absolute;
+  left: 0;
+  top: 0.4rem;
+  width: 9px;
+  height: 9px;
+  border: 1px solid color-mix(in oklch, var(--foreground) 40%, transparent);
+  border-radius: 50%;
+  background: var(--background);
+}
+
+.work-timeline__dot--current {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 20%, transparent);
+}
+
+/* Hairline dividers between meta items. Each item draws its divider in the gap to
+   its left; overflow clips the one on whichever item starts a line, so a wrapped
+   row never begins with a stray rule. */
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1.5rem;
+  row-gap: 0.35rem;
+  overflow: hidden;
+}
+
+.project-meta__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.project-meta__item::before {
+  content: "";
+  position: absolute;
+  left: -0.75rem;
+  top: 50%;
+  width: 1px;
+  height: 0.75rem;
+  translate: 0 -50%;
+  background: var(--border);
+}
+
 .label-caps {
   font-family: var(--font-mono-family), ui-monospace, monospace;
   font-size: 0.75rem;
@@ -536,7 +630,7 @@ a {
 
 @media (min-width: 480px) {
   .case-metrics {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
   }
 }
 

@@ -129,12 +129,12 @@ export function NavDock() {
   return (
     <nav
       aria-label="Page sections"
-      className={`motion-dock fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 sm:bottom-6 ${
+      className={`motion-dock fixed inset-x-0 bottom-4 z-50 flex justify-center px-3 sm:bottom-6 sm:px-4 ${
         mounted ? "motion-dock--in" : ""
       }`}
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <div className="motion-dock__pill flex items-center gap-1 rounded-full border border-border bg-background/85 py-1.5 pl-1.5 pr-2 shadow-[0_8px_24px_rgb(0_0_0/0.10)] backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
+      <div className="motion-dock__pill flex max-w-full items-center gap-0.5 rounded-full border border-border bg-background/85 py-1.5 pl-1.5 pr-1.5 shadow-[0_8px_24px_rgb(0_0_0/0.10)] backdrop-blur-md supports-[backdrop-filter]:bg-background/70">
         <ul ref={listRef} className="relative flex items-center gap-0.5">
           <div
             ref={highlightRef}
@@ -150,7 +150,7 @@ export function NavDock() {
                   data-nav-id={section.id}
                   onClick={(event) => smoothScrollTo(event, section.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`motion-dock__link relative z-10 flex h-10 items-center whitespace-nowrap rounded-full px-3.5 font-mono text-xs uppercase tracking-[0.08em] transition-colors duration-200 ${
+                  className={`motion-dock__link relative z-10 flex h-10 items-center whitespace-nowrap rounded-full px-2 font-mono text-xs uppercase tracking-normal transition-colors min-[420px]:px-2.5 sm:px-3.5 sm:tracking-[0.08em] duration-200 ${
                     isActive ? "text-accent" : "text-muted hover:text-foreground"
                   }`}
                 >
@@ -160,7 +160,7 @@ export function NavDock() {
             );
           })}
         </ul>
-        <div className="motion-dock__divider h-5 w-px shrink-0 bg-border" aria-hidden="true" />
+        <div className="motion-dock__divider mx-1 h-5 w-px shrink-0 bg-border" aria-hidden="true" />
         <ThemeToggle compact className="motion-dock__theme" />
       </div>
     </nav>

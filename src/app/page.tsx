@@ -14,7 +14,7 @@ export default function Home() {
       >
         Skip to content
       </a>
-      <div className="mx-auto max-w-6xl px-4 py-8 pb-28 sm:px-8 sm:py-14 sm:pb-32 lg:py-16">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 py-8 pb-28 sm:px-8 sm:py-14 sm:pb-32 lg:py-16">
         <main id="main-content" className="min-w-0">
           <Hero />
           <div className="mt-12 space-y-0 sm:mt-16 lg:mt-20">
@@ -23,9 +23,9 @@ export default function Home() {
             <TechStack />
             <Contact />
           </div>
-          <footer className="mt-12 border-t border-border pt-6 sm:mt-16 sm:pt-8 lg:mt-20">
+          <footer className="border-t border-border pt-6 sm:pt-8">
             <p className="font-mono text-xs leading-relaxed text-muted">
-              {new Date().getFullYear()} · Pratik Keraba Kumbhar
+              &copy; {new Date().getFullYear()} Pratik Keraba Kumbhar
             </p>
           </footer>
         </main>

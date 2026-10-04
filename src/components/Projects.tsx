@@ -1,14 +1,30 @@
 import { projects, type Project } from "@/lib/data";
 import { ArchitectureDiagram } from "./ArchitectureDiagram";
+import { ArrowUpRightIcon, BriefcaseIcon, CodeIcon } from "./Icons";
 import { RevealOnView } from "./RevealOnView";
 
 function ProjectArticle({ project }: { project: Project }) {
   return (
     <article
-      className="case-study-grid border-t border-border py-10 first:border-t-0 first:pt-0 sm:py-14"
+      id={project.id}
+      className="case-study-grid scroll-mt-24 lg:scroll-mt-28"
     >
       <div className="case-study-grid__lead min-w-0">
-        <p className="label-caps">{project.context}</p>
+        <ul className="label-caps project-meta" aria-label="Project context">
+          <li className="project-meta__item">
+            {project.category === "work" ? (
+              <BriefcaseIcon size={13} className="shrink-0 text-accent" />
+            ) : (
+              <CodeIcon size={13} className="shrink-0 text-accent" />
+            )}
+            {project.category === "work" ? "Work" : "Personal"}
+          </li>
+          {project.context.map((item) => (
+            <li key={item} className="project-meta__item">
+              {item}
+            </li>
+          ))}
+        </ul>
         <h3 className="mt-4 text-lg font-medium leading-snug tracking-[-0.02em] text-pretty sm:mt-5 sm:text-xl">
           {project.title}
         </h3>
@@ -44,9 +60,9 @@ function ProjectArticle({ project }: { project: Project }) {
         {project.metrics.length > 0 && (
           <dl className="case-metrics mt-6 sm:mt-8">
             {project.metrics.map((metric) => (
-              <div key={metric.label} className="min-w-0 border-l border-border pl-4">
+              <div key={metric.label} className="flex min-w-0 flex-col border-l border-border pl-4">
                 <dt className="label-caps">{metric.label}</dt>
-                <dd className="metric-value mt-2 font-mono text-lg leading-snug tabular-nums tracking-tight">
+                <dd className="metric-value mt-auto pt-2 font-mono text-lg leading-snug tabular-nums tracking-tight">
                   {metric.value}
                 </dd>
               </div>
@@ -54,9 +70,9 @@ function ProjectArticle({ project }: { project: Project }) {
           </dl>
         )}
 
-        <div className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+        <div className="mt-8 flex flex-wrap items-start gap-x-6 gap-y-5">
           <ul
-            className="flex min-w-0 flex-1 flex-wrap gap-x-3 gap-y-2"
+            className="flex min-w-0 flex-1 basis-64 flex-wrap gap-x-3 gap-y-2"
             aria-label="Technologies used"
           >
             {project.stack.map((tech) => (
@@ -69,7 +85,7 @@ function ProjectArticle({ project }: { project: Project }) {
               </li>
             ))}
           </ul>
-          <div className="flex shrink-0 flex-col items-start gap-2 sm:max-w-[14rem] sm:items-end sm:text-right">
+          <div className="flex shrink-0 flex-wrap items-center gap-x-5">
             {project.proprietary && (
               <p className="font-mono text-xs leading-relaxed text-muted text-pretty">
                 Client work, code not public
@@ -80,9 +96,10 @@ function ProjectArticle({ project }: { project: Project }) {
                 href={project.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="motion-link touch-link min-h-11 whitespace-nowrap px-1 font-mono text-xs"
+                className="motion-link touch-link -my-3 min-h-11 whitespace-nowrap font-mono text-xs"
               >
-                View live <span className="motion-link__arrow">→</span>
+                View live
+                <ArrowUpRightIcon size={13} className="motion-link__arrow ml-1 inline-block align-[-2px]" />
               </a>
             )}
             {project.repoUrl && (
@@ -90,9 +107,10 @@ function ProjectArticle({ project }: { project: Project }) {
                 href={project.repoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="motion-link touch-link min-h-11 whitespace-nowrap px-1 font-mono text-xs"
+                className="motion-link touch-link -my-3 min-h-11 whitespace-nowrap font-mono text-xs"
               >
-                View source <span className="motion-link__arrow">→</span>
+                View source
+                <ArrowUpRightIcon size={13} className="motion-link__arrow ml-1 inline-block align-[-2px]" />
               </a>
             )}
           </div>
@@ -122,7 +140,11 @@ export function Projects() {
 
       <div className="section-body flex flex-col">
         {projects.map((project) => (
-          <RevealOnView key={project.id} variant="item">
+          <RevealOnView
+            key={project.id}
+            variant="item"
+            className="border-t border-border py-10 first:border-t-0 first:pt-0 last:pb-0 sm:py-14"
+          >
             <ProjectArticle project={project} />
           </RevealOnView>
         ))}

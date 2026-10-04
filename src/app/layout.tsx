@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Schibsted_Grotesk } from "next/font/google";
+// Cursor spotlight — disabled for now, not removed. Re-enable by uncommenting
+// this import and the <CursorSpotlight /> line below.
+// import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { JsonLd } from "@/components/JsonLd";
 import { ScrollMotion } from "@/components/ScrollMotion";
 import { ThemeProvider } from "@/components/ThemeProvider";
@@ -22,7 +25,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 const siteUrl = getSiteUrl();
 const description =
-  "Backend developer at Tudip, working on ASP.NET Core Web APIs, SQL Server, Microsoft Graph order-email ingestion, and portal integrations (Zoho CRM, RingCentral, Stripe). Also built Ethix Portal, a MERN side project.";
+  "Backend developer at Tudip, working on ASP.NET Core Web APIs, SQL Server, Microsoft Graph order-email ingestion, and portal integrations (Zoho CRM, RingCentral, Stripe). Side projects include Ethix Portal (MERN) and RelayForge, a .NET 8 DAG job scheduler.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -65,6 +68,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full bg-background font-sans text-foreground">
         <ThemeProvider>
+          {/* <CursorSpotlight /> */}
           <ScrollMotion />
           {children}
         </ThemeProvider>
