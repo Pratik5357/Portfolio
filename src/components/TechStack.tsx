@@ -21,7 +21,7 @@ export function TechStack() {
 
         <div className="section-body grid grid-cols-1 gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="min-w-0">
-            <h3 className="label-caps !text-foreground">Core</h3>
+            <h3 className="label-caps label-caps--strong">Core</h3>
             <ul className="mt-5 space-y-5">
               {techStack.core.map((item) => (
                 <RevealOnView
@@ -33,7 +33,7 @@ export function TechStack() {
                   <span className="min-w-0 font-medium leading-snug text-pretty">
                     {item.name}
                   </span>
-                  <span className="body-copy !max-w-none !text-foreground/75">
+                  <span className="body-copy !max-w-none">
                     {item.depth}
                   </span>
                 </RevealOnView>
@@ -42,7 +42,7 @@ export function TechStack() {
           </div>
 
           <div className="min-w-0 border-t border-border pt-10 sm:pt-12 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-12 xl:pl-16">
-            <h3 className="label-caps !text-foreground">Also worked with</h3>
+            <h3 className="label-caps label-caps--strong">Also worked with</h3>
             <div className="mt-5 space-y-7">
               {techStack.secondary.map((group) => (
                 <div key={group.group} className="min-w-0">
@@ -60,7 +60,7 @@ export function TechStack() {
                         <span className="min-w-0 font-medium leading-snug text-pretty">
                           {item.name}
                         </span>
-                        <span className="body-copy !max-w-none !text-foreground/75">
+                        <span className="body-copy !max-w-none">
                           {item.depth}
                         </span>
                       </RevealOnView>

@@ -1,4 +1,5 @@
 import { site } from "@/lib/data";
+import { ArrowUpRightIcon } from "./Icons";
 import { RevealOnView } from "./RevealOnView";
 
 type ContactLink = {
@@ -68,9 +69,15 @@ export function Contact() {
                   {link.label}
                 </span>
                 <span
-                  className={`motion-link text-base leading-snug ${link.valueClassName ?? "copy-stable"}`}
+                  className={`motion-link inline-flex items-center gap-1.5 text-base leading-snug ${link.valueClassName ?? "copy-stable"}`}
                 >
                   {link.value}
+                  {link.external && (
+                    <>
+                      <ArrowUpRightIcon size={13} className="motion-link__arrow shrink-0" />
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </>
+                  )}
                 </span>
               </a>
             </RevealOnView>

@@ -12,7 +12,7 @@
   --accent-hover: oklch(0.4 0.11 165);
   --selection-bg: oklch(0.46 0.1 165 / 0.18);
   --selection-fg: oklch(0.18 0.012 260);
-  --focus-ring: oklch(0.46 0.1 165 / 0.45);
+  --focus-ring: oklch(0.46 0.1 165);
   --copy: oklch(0.22 0.012 260 / 0.85);
   --copy-lead: oklch(0.22 0.012 260 / 0.85);
   --progress-track: oklch(0.88 0.006 260 / 0.6);
@@ -20,6 +20,7 @@
   --node-border: oklch(0.22 0.012 260 / 0.35);
   --connector: oklch(0.22 0.012 260 / 0.25);
   --tap-highlight: oklch(0.46 0.1 165 / 0.12);
+  --panel: oklch(0.972 0.005 85);
   --scroll-progress: 0;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -39,7 +40,7 @@
   --accent-hover: oklch(0.74 0.12 165);
   --selection-bg: oklch(0.68 0.11 165 / 0.28);
   --selection-fg: oklch(0.95 0.006 85);
-  --focus-ring: oklch(0.68 0.11 165 / 0.55);
+  --focus-ring: oklch(0.68 0.11 165);
   --copy: oklch(0.93 0.006 85 / 0.86);
   --copy-lead: oklch(0.93 0.006 85 / 0.8);
   --progress-track: oklch(0.29 0.01 260 / 0.85);
@@ -47,12 +48,14 @@
   --node-border: oklch(0.93 0.006 85 / 0.32);
   --connector: oklch(0.93 0.006 85 / 0.22);
   --tap-highlight: oklch(0.68 0.11 165 / 0.18);
+  --panel: oklch(0.18 0.014 260);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-copy: var(--copy);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --font-sans: var(--font-sans-family);
@@ -183,12 +186,7 @@ html.theme-transition * {
     left: 0;
     width: 100%;
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      var(--accent),
-      var(--border) 55%,
-      transparent
-    );
+    background: var(--border);
     transform: scaleX(0);
     transform-origin: left center;
     animation: rule-draw 500ms var(--ease-dramatic) 260ms both;
@@ -265,6 +263,11 @@ html.theme-transition * {
     transform: translateX(3px);
   }
 
+  .cta:hover .motion-link__arrow,
+  .cta:focus-visible .motion-link__arrow {
+    transform: translate(2px, -2px);
+  }
+
   .motion-link:hover .motion-link__arrow--down,
   .motion-link:focus-visible .motion-link__arrow--down {
     transform: translateY(2px);
@@ -303,30 +306,7 @@ html.theme-transition * {
     transform: translateX(calc((1 - var(--reveal-progress, 0)) * -20px));
   }
 
-  /* Architecture flow — scroll-linked per step */
-  .motion-flow--scroll .motion-flow__step {
-    opacity: calc(0.15 + 0.85 * var(--reveal-progress, 0));
-    transform: translateX(calc((1 - var(--reveal-progress, 0)) * -14px))
-      scale(calc(0.97 + 0.03 * var(--reveal-progress, 0)));
-    transition: none;
-  }
 
-  .motion-flow--scroll .motion-flow__connector {
-    transform: scaleY(var(--reveal-progress, 0));
-    opacity: var(--reveal-progress, 0);
-    transition: none;
-  }
-
-  .motion-flow__node {
-    transition:
-      border-color 400ms var(--ease-out),
-      background-color 400ms var(--ease-out),
-      box-shadow 400ms var(--ease-out);
-  }
-
-  .motion-flow__node:hover {
-    box-shadow: 0 0 0 1px color-mix(in oklch, var(--accent) 18%, transparent);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -340,13 +320,6 @@ html.theme-transition * {
 
   .motion-reveal,
   .motion-reveal--scroll {
-    opacity: 1;
-    transform: none;
-    filter: none;
-  }
-
-  .motion-flow__step,
-  .motion-flow__connector {
     opacity: 1;
     transform: none;
     filter: none;
@@ -593,6 +566,10 @@ a {
   hyphens: none;
 }
 
+.label-caps--strong {
+  color: var(--foreground);
+}
+
 .body-copy {
   font-size: 0.875rem;
   line-height: 1.65;
@@ -624,14 +601,8 @@ a {
 
 .case-metrics {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5rem), 1fr));
   gap: 1rem;
-}
-
-@media (min-width: 480px) {
-  .case-metrics {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 8rem), 1fr));
-  }
 }
 
 .contact-grid {
@@ -680,37 +651,283 @@ a {
   }
 }
 
-.case-study-grid {
-  display: grid;
+/* Projects: framed panels. One hairline, a faint lift off the ground, no shadow,
+   nothing nested inside that draws its own box. */
+.project-panel {
   min-width: 0;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.project-index {
+  display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.5rem;
+  grid-auto-flow: row dense;
+  gap: 1rem;
 }
 
 @media (min-width: 640px) {
-  .case-study-grid {
-    gap: 2rem;
+  .project-index {
+    gap: 1.5rem;
   }
 }
 
-@media (min-width: 1280px) {
-  .case-study-grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 2rem;
-    row-gap: 2.5rem;
+@media (min-width: 1024px) {
+  .project-index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .case-study-grid__lead {
-    grid-column: span 4 / span 4;
+  /* Opening a case study turns the index into a single column: the open panel gets
+     full width for its notes and diagram, and nothing reflows out of reading order. */
+  .project-index:has(details[open]) {
+    grid-template-columns: minmax(0, 1fr);
   }
+}
 
-  .case-study-grid__diagram {
-    grid-column: span 3 / span 3;
-  }
+/* Status token: one treatment for every state marker (Live, In progress). */
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono-family), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--accent);
+  white-space: nowrap;
+}
 
-  .case-study-grid__detail {
-    grid-column: span 5 / span 5;
-  }
+.status-tag::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.stack-tag {
+  border: 1px solid color-mix(in oklch, var(--accent) 28%, transparent);
+  background: color-mix(in oklch, var(--accent) 7%, transparent);
+  color: var(--accent);
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-mono-family), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.cta {
+  gap: 0.5rem;
+  padding-inline: 1.125rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform 120ms var(--ease-out),
+    background-color 180ms var(--ease-out),
+    border-color 180ms var(--ease-out),
+    color 180ms var(--ease-out);
+}
+
+.cta--primary {
+  background: var(--accent);
+  color: var(--background);
+}
+
+.cta--primary:hover {
+  background: var(--accent-hover);
+}
+
+.cta--secondary {
+  border: 1px solid color-mix(in oklch, var(--foreground) 22%, transparent);
+  color: var(--foreground);
+}
+
+.cta--secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.case-toggle {
+  list-style: none;
+}
+
+.case-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.case-toggle__chevron {
+  transition: transform 200ms var(--ease-out);
+}
+
+/* Architecture diagrams: layered swimlanes, shaped nodes, orthogonal edges routed
+   from measured boxes (ArchitectureDiagram.tsx). Stores are cylinders, external
+   systems dashed, the case study's own component drawn in the accent. */
+.arch {
+  position: relative;
+  --arch-edge: color-mix(in oklch, var(--foreground) 42%, transparent);
+  --arch-node-border: color-mix(in oklch, var(--foreground) 30%, transparent);
+}
+
+.arch-lane {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.125rem minmax(0, 1fr);
+  column-gap: 0.625rem;
+  align-items: center;
+}
+
+.arch-lane__name {
+  writing-mode: vertical-rl;
+  rotate: 180deg;
+  justify-self: center;
+  font-family: var(--font-mono-family), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.arch-lane__nodes {
+  display: grid;
+  column-gap: 0.625rem;
+  align-items: stretch;
+}
+
+.arch-lane__nodes--flow {
+  column-gap: 3.75rem;
+}
+
+/* Hairline lane rule in the middle of each gap: the layers read as layers. */
+.arch-gap {
+  position: relative;
+  height: 4.25rem;
+}
+
+.arch-gap::after {
+  content: "";
+  position: absolute;
+  left: 1.75rem;
+  right: 0;
+  top: 50%;
+  border-top: 1px dashed color-mix(in oklch, var(--border) 80%, transparent);
+}
+
+.arch-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  min-height: 3.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  border: 1px solid var(--arch-node-border);
+  border-radius: 3px;
+  background: var(--background);
+  padding: 0.5rem 0.5rem;
+  text-align: center;
+}
+
+.arch-node--solo {
+  justify-self: center;
+  width: min(100%, 13rem);
+}
+
+.arch-node__label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+
+.arch-node__detail {
+  font-family: var(--font-mono-family), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--muted);
+  text-wrap: balance;
+}
+
+/* Worker: a second offset outline, the convention for "runs as many". */
+.arch-node--worker {
+  box-shadow: 3px 3px 0 -1px var(--background), 3px 3px 0 0 var(--arch-node-border);
+}
+
+.arch-node--store {
+  border-radius: 50% / 0.625rem;
+  padding-top: 1.125rem;
+}
+
+.arch-node--store::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  height: 1.25rem;
+  border: 1px solid var(--arch-node-border);
+  border-radius: 50%;
+}
+
+.arch-node--external {
+  border-style: dashed;
+  background: var(--panel);
+}
+
+.arch-node--legacy .arch-node__label {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: color-mix(in oklch, var(--muted) 60%, transparent);
+}
+
+.arch-node--core {
+  --arch-node-border: var(--accent);
+  background: color-mix(in oklch, var(--accent) 8%, var(--background));
+}
+
+.arch-node--core .arch-node__label {
+  color: var(--accent);
+}
+
+.arch-edges {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.arch-edges__line {
+  fill: none;
+  stroke: var(--arch-edge);
+  stroke-width: 1;
+}
+
+.arch-edges__line--async {
+  stroke-dasharray: 4 3;
+}
+
+.arch-edges__head {
+  fill: var(--arch-edge);
+}
+
+.arch-edge-label {
+  position: absolute;
+  z-index: 2;
+  translate: -50% -50%;
+  background: var(--panel);
+  padding: 0 0.3rem;
+  font-family: var(--font-mono-family), ui-monospace, monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 .touch-link {

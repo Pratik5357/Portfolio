@@ -1,5 +1,5 @@
 import { site } from "@/lib/data";
-import { MapPinIcon } from "./Icons";
+import { ArrowDownIcon, MapPinIcon } from "./Icons";
 
 const focusAreas = [".NET", "Web API", "SQL Server", "Integrations"];
 
@@ -18,10 +18,7 @@ export function Hero() {
           aria-label="Focus areas"
         >
           {focusAreas.map((area) => (
-            <li
-              key={area}
-              className="border border-border px-2 py-0.5 font-mono text-xs leading-relaxed text-muted"
-            >
+            <li key={area} className="stack-tag">
               {area}
             </li>
           ))}
@@ -29,28 +26,24 @@ export function Hero() {
       </div>
 
       <div className="motion-hero__aside min-w-0 border-t border-border pt-8 lg:col-span-4 lg:col-start-9 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-10">
-        <p className="max-w-full break-words text-base leading-[1.65] text-pretty text-foreground/90 sm:text-lg">
+        <p className="max-w-full break-words text-base leading-[1.65] text-pretty text-copy sm:text-lg">
           {site.statement}
         </p>
-        <p className="mt-4 max-w-full break-words font-mono text-xs leading-relaxed text-foreground/70 text-pretty sm:mt-5">
+        <p className="mt-4 max-w-full break-words font-mono text-xs leading-relaxed text-muted text-pretty sm:mt-5">
           {site.shipped}
         </p>
         <p className="mt-5 flex items-center gap-1.5 font-mono text-xs leading-relaxed text-muted text-pretty sm:mt-6">
           <MapPinIcon size={13} className="shrink-0" />
           {site.location}
         </p>
-        <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 sm:mt-6">
-          <a
-            href="#experience"
-            className="motion-link touch-link font-mono text-sm whitespace-nowrap"
-          >
-            Experience
-          </a>
-          <a
-            href="#contact"
-            className="motion-link touch-link font-mono text-sm whitespace-nowrap"
-          >
+        <div className="mt-6 flex flex-wrap gap-3 sm:mt-7">
+          <a href="#contact" className="cta cta--primary touch-link">
             Get in touch
+            <ArrowDownIcon size={13} className="motion-link__arrow motion-link__arrow--down" />
+          </a>
+          <a href="#experience" className="cta cta--secondary touch-link">
+            Experience
+            <ArrowDownIcon size={13} className="motion-link__arrow motion-link__arrow--down" />
           </a>
         </div>
       </div>

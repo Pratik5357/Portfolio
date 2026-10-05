@@ -150,7 +150,7 @@ export function NavDock() {
                   data-nav-id={section.id}
                   onClick={(event) => smoothScrollTo(event, section.id)}
                   aria-current={isActive ? "location" : undefined}
-                  className={`motion-dock__link relative z-10 flex h-10 items-center whitespace-nowrap rounded-full px-2 font-mono text-xs uppercase tracking-normal transition-colors min-[420px]:px-2.5 sm:px-3.5 sm:tracking-[0.08em] duration-200 ${
+                  className={`motion-dock__link relative z-10 flex h-11 items-center whitespace-nowrap rounded-full px-2 font-mono text-xs uppercase tracking-normal transition-colors min-[420px]:px-2.5 sm:px-3.5 sm:tracking-[0.08em] duration-200 ${
                     isActive ? "text-accent" : "text-muted hover:text-foreground"
                   }`}
                 >

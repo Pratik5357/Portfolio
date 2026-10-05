@@ -60,8 +60,8 @@ export function ThemeToggle({ className = "", compact = false }: ThemeToggleProp
       <button
         type="button"
         onClick={handleToggle}
-        className={`theme-toggle theme-toggle--compact flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent ${className}`}
-        aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+        className={`theme-toggle theme-toggle--compact flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-muted transition-colors duration-200 hover:text-accent focus-visible:text-accent ${className}`}
+        aria-label="Dark theme"
         aria-pressed={isDark}
       >
         {isDark ? <SunIcon /> : <MoonIcon />}
@@ -74,7 +74,7 @@ export function ThemeToggle({ className = "", compact = false }: ThemeToggleProp
       type="button"
       onClick={handleToggle}
       className={`theme-toggle touch-link inline-flex items-center gap-2 border border-border px-3 font-mono text-xs uppercase tracking-[0.1em] text-muted transition-colors duration-200 hover:border-accent/40 hover:text-accent focus-visible:text-accent ${className}`}
-      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      aria-label="Dark theme"
       aria-pressed={isDark}
     >
       {isDark ? <SunIcon /> : <MoonIcon />}

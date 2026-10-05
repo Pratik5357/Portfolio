@@ -39,12 +39,12 @@ export function Experience() {
                 {entry.period}
               </time>
               <div className="min-w-0">
-                <p className="font-medium leading-snug text-pretty">
+                <h3 className="text-lg font-medium leading-snug text-pretty">
                   <span className="whitespace-nowrap">{entry.role}</span>
-                  <span className="text-foreground/50"> at </span>
-                  <span className="text-foreground/80">{entry.company}</span>
-                </p>
-                <p className="body-copy mt-3 !text-foreground/75">
+                  <span className="text-muted"> at </span>
+                  <span className="text-copy">{entry.company}</span>
+                </h3>
+                <p className="body-copy mt-3">
                   {entry.summary}
                 </p>
                 {entry.dayToDay && (
@@ -67,12 +67,10 @@ export function Experience() {
                         <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-medium leading-snug text-pretty">
                           {item.title}
                           {item.current && (
-                            <span className="border border-accent/40 px-1.5 py-px font-mono text-xs font-normal leading-relaxed text-accent">
-                              In progress
-                            </span>
+                            <span className="status-tag">In progress</span>
                           )}
                         </p>
-                        <p className="body-copy mt-1.5 !text-foreground/75">
+                        <p className="body-copy mt-1.5">
                           {item.did}
                         </p>
                         {item.caseStudy && (
